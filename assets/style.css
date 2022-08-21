@@ -12,6 +12,8 @@ header {
     font-weight: bolder;
 }
 .number-change {
+    display: flex;
+    justify-content: center;
     font-size: 150%;
     font-weight: light;
 }
