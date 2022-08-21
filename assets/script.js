@@ -86,6 +86,9 @@ function whatQuestion() {
     return currentQuestion;
 };
 
+function pushQuestion() {
+    // I want to push question content to content-card, caused by button click
+}
 
 /* first attempt, technically works but I wanted it to be more random
 I don't want people to memorize where the answer is for speedrunning, ya dig?
