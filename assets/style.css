@@ -11,6 +11,14 @@ header {
     font-size: 200%;
     font-weight: bolder;
 }
+.timertitle {
+    display: flex;
+    flex-direction: row;
+}
+.timer {
+    display: flex;
+    flex-direction: column;
+}
 .number-change {
     display: flex;
     justify-content: center;
