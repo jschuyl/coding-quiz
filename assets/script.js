@@ -1,20 +1,26 @@
 // timer goes here
-// based on https://www.youtube.com/watch?v=x7WJEmxNlEs
+
+
 function timer() {
-    const startTime = 10;
-    let minToSec = startTime * 60;
+    let [mill, sec, min] = [0, 0, 0];
 
-    const countdownTimer = document.getElementById('timeytime');
+    const howLong = document.getElementById('timeytime');
 
-    setInterval(timeLeft, 1000);
+    setInterval (stopwatch, 10) 
 
-    function timeLeft() {
-        const min = Math.floor(minToSec / 60);
-        let sec = minToSec % 60;
+    function stopwatch() {
+        mill += 10;
+        if (mill === 1000) {
+            mill = 0;
+            sec++;
+            if (sec === 60) {
+                sec = 0;
+                min++
+            }
+        }
 
-        countdownTimer.innerHTML = `${min}: ${sec}`;
-        minToSec--;
     }
+    howLong.innerHTML = `${min}: ${sec}: ${mill}`;
 
 };
 
@@ -76,27 +82,26 @@ var Q10 = {
 // where I am drawing my question options from
 const Qarray = [Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10];
 // randomly chooses question and then removes it from the array
-function whatQuestion() {
+function whatQuestion(event) {
+    
     for (let i = 0; i < Qarray.length; i++);
     if (Qarray.length === 0) {
         quizComplete = 'Quiz Complete!'
         return quizComplete
     }
-    var currentQuestion = Qarray.splice(Math.floor(Math.random() * Qarray.length), 1); 
+    
+    var currentQuestion = Qarray.splice(Math.floor(Math.random() * Qarray.length), 1);
     return currentQuestion;
 };
 
-function pushQuestion() {
+function pushQuestion(event) {
     // I want to push question content to content-card, caused by button click
+    document.getElementById('what-u-know').innerHTML = currentquestion;
+    
+
 }
 
-/* first attempt, technically works but I wanted it to be more random
-I don't want people to memorize where the answer is for speedrunning, ya dig?
-function whatQuestion() {
-    for (let i = 0; i < Qarray.length; i++);
-    currentQuestion = Qarray.pop();
-    return currentQuestion;
-};*/
+
 // for testing
 console.log(whatQuestion());
 console.log(whatQuestion());
@@ -110,3 +115,31 @@ console.log(whatQuestion());
 console.log(whatQuestion());
 console.log(whatQuestion());
 console.log(Qarray)
+
+
+// old code cemetary: safekeeping in case I can use it later
+// I want to count up not down, easier to incorporate high scores that way
+    // countdown was based on https://www.youtube.com/watch?v=x7WJEmxNlEs
+    /*const startTime = 10;
+    let minToSec = startTime * 60;
+
+    const countdownTimer = document.getElementById('timeytime');
+
+    setInterval(timeLeft, 1000);
+
+    function timeLeft() {
+        const min = Math.floor(minToSec / 60);
+        let sec = minToSec % 60;
+
+        countdownTimer.innerHTML = `${min}: ${sec}`;
+        minToSec--;
+    }*/
+
+/* first attempt at displaying what is deleted from array, 
+technically works but I wanted it to be more random
+I don't want people to memorize where the answer is for speedrunning, ya dig?
+function whatQuestion() {
+    for (let i = 0; i < Qarray.length; i++);
+    currentQuestion = Qarray.pop();
+    return currentQuestion;
+};*/
