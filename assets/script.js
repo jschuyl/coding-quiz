@@ -21,24 +21,15 @@ function startQuiz() {
     }
 }
 // clear question
+function clearCard() {
 
-// randomly chooses question and then removes it from the array
-nextQuest.addEventListener('click', whichQuestion)
-function whichQuestion() {
-    
-    /*if (Qarray.length === 0) {
-        document.getElementById('display-question').innerText = 'Quiz Complete!'
-    }*/
-    
-    var currentQuestion = Qarray.splice(Math.floor(Math.random() * Qarray.length), 1);
-    let myCurrentQuestion = JSON.stringify(Qarray);
-    document.getElementById('display-question').innerHTML = (currentQuestion);
-    
-};
+}
 
 // display question
+nextQuest.addEventListener('click', pushQuestion);
 function pushQuestion() {
     // I want to push question content to content-card, caused by button click
+
    
     
 
@@ -99,22 +90,56 @@ const Qarray = [
     ],
     }
 ]
-// for testing
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(whichQuestion());
-console.log(Qarray)
+
 
 // timer goes here
+let interval = null;
+let howLong = document.getElementById('time');
+let [mill, sec, min] = [0, 0, 0];
 
+startNow.addEventListener('click', timer)
+function timer() {
+    startNow.addEventListener('click', clearTime);
 
+    function clearTime() {
+        if(interval !== null) {
+        clearInterval(interval)
+        }
+    };
+
+    let interval = setInterval (stopwatch, 10);
+
+    function stopwatch() {
+        mill += 10;
+        if (mill == 1000) {
+            mill = 0;
+            sec++;
+            if (sec == 60) {
+                sec = 0;
+                min++;
+                if (min == 60) {
+                    min = 0;
+                } 
+            }
+        }
+        // displays the time
+        let m = min < 10 ? "0" + min : min;
+        let s = sec < 10 ? '0' + sec : sec;
+        let mi = mill < 10 ? '00' + mill :  mill < 100 ? '0' + mill : mill; 
+
+        document.querySelector('time').innerHTML = `${m}: ${s}: ${mi}`;
+    };
+    
+};
+// for testing
+console.log(pushQuestion());
+console.log(pushQuestion());
+console.log(pushQuestion());
+console.log(pushQuestion());
+console.log(pushQuestion());
+
+console.log(Qarray)
+// OLD CODE CEMETERY
 /*function timer(event) {
     // trying to use local time and subtract starting time from finishing time
         setInterval(theTime, 1000);
@@ -130,7 +155,7 @@ console.log(Qarray)
         let whatTime = setInterval(theTime, 1000);
         function theTime() {
             const d = new Date();
-            document.getElementById("timeytime").innerHTML = d.toLocaleTimeString();
+            document.getElementById("time").innerHTML = d.toLocaleTimeString();
         }
         document.getElementById("magic-button").addEventListener('click', clearInterval(whatTime))
     };
@@ -139,7 +164,7 @@ console.log(Qarray)
     // starts the timer
     document.getElementById('magic-button').addEventListener('click', timer());
     */
-// old code cemetary: safekeeping in case I can use it later
+
 // I want to count up not down, easier to incorporate high scores that way
     // countdown was based on https://www.youtube.com/watch?v=x7WJEmxNlEs
     /*const startTime = 10;
@@ -156,6 +181,7 @@ console.log(Qarray)
         countdownTimer.innerHTML = `${min}: ${sec}`;
         minToSec--;
     }*/
+
 // failed stopwatch attempt, might try again later
 /*let [min, sec, mill] = [0, 0, 0];
 
@@ -214,4 +240,17 @@ function whatQuestion() {
         }
     }
 }
+// randomly chooses question and then removes it from the array
+// this didn't work, it went through all the questions at once instead of one at a time
+/*nextQuest.addEventListener('click', whichQuestion);
+function whichQuestion() {
+    
+    if (Qarray.length === 0) {
+        document.getElementById('display-question').innerText = 'Quiz Complete!'
+    }
+    
+    var currentQuestion = Qarray.splice(Math.floor(Math.random() * Qarray.length), 1);
+    document.getElementById('display-question').innerHTML = (currentQuestion);
+    
+};
 */
