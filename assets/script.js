@@ -1,96 +1,115 @@
-var questionInput = document.querySelector('what-u-know');
-var answerChoiceA = document.querySelector('optionA');
-var answerChoiceB = document.querySelector('optionB');
-var answerChoiceC = document.querySelector('optionC');
-var answerChoiceD = document.querySelector('optionD');
+const questionInput = document.getElementById('what-u-know');
+const buttonA = document.getElementById('optionA');
+const buttonB = document.getElementById('optionB');
+const buttonC = document.getElementById('optionC');
+const buttonD = document.getElementById('optionD');
+const startNow = document.getElementById('start-button');
+const nextQuest = document.getElementById('next-button');
 
 
-// All 10 questions down below
-var Q1 = {
-    question: 'placeholder question 1',
-    choices: ['A. Test', 'B. Correct', 'C. Test', 'D. Test'],
-    answer: 'B',
-};
-var Q2 = {
-    question: 'placeholder question 2',
-    choices: ['A. Correct', 'B. Test', 'C. Test', 'D. Test'],
-    answer: 'A',
-};
-var Q3 ={
-    question: 'placeholder question 3',
-    choices: ['A. Test', 'B. Test', 'C. Test', 'D. Correct'],
-    answer: 'D',
-};
-var Q4 = {
-    question: 'placeholder question 4',
-    choices: ['A. Test', 'B. Test', 'C. Correct', 'D. Test'],
-    answer: 'C',
-};
-var Q5 = {
-    question: 'placeholder question 5',
-    choices: ['A. Test', 'B. Test', 'C. Correct', 'D. Test'],
-    answer: 'C',
-};
-var Q6 = {
-    question: 'placeholder question 6',
-    choices: ['A. Correct', 'B. Test', 'C. Test', 'D. Test'],
-    answer: 'A',
-};
-var Q7 = {
-    question: 'placeholder question 7',
-    choices: ['A. Test', 'B. Correct', 'C. Test', 'D. Test'],
-    answer: 'B',
-};
-var Q8 = {
-    question: 'placeholder question 8',
-    choices: ['A. Test', 'B. Test', 'C. Test', 'D. Correct'],
-    answer: 'D',
-};
-var Q9 = {
-    question: 'placeholder question 9',
-    choices: ['A. Correct', 'B. Test', 'C. Test', 'D. Test'],
-    answer: 'A',
-};
-var Q10 = {
-    question: 'placeholder question 10',
-    choices: ['A. Test', 'B. Test', 'C. Correct', 'D. Test'],
-    answer: 'C',
-};
-// where I am drawing my question options from
-const Qarray = [Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10];
-// randomly chooses question and then removes it from the array
-function whatQuestion() {
-    
-    for (let i = 0; i < Qarray.length; i++);
+// start quiz
+startNow.addEventListener('click', startQuiz)
+function startQuiz() {
+    startNow.classList.add('hide');
+    nextQuest.classList.remove('hide');
     if (Qarray.length === 0) {
-        quizComplete = 'Quiz Complete!'
-        return quizComplete
+        nextQuest.classList.add('hide'); 
+        buttonA.classList.add('hide');
+        buttonB.classList.add('hide');
+        buttonC.classList.add('hide');
+        buttonD.classList.add('hide');
     }
+}
+// clear question
+
+// randomly chooses question and then removes it from the array
+nextQuest.addEventListener('click', whichQuestion)
+function whichQuestion() {
+    
+    /*if (Qarray.length === 0) {
+        document.getElementById('display-question').innerText = 'Quiz Complete!'
+    }*/
     
     var currentQuestion = Qarray.splice(Math.floor(Math.random() * Qarray.length), 1);
-    return currentQuestion;
+    let myCurrentQuestion = JSON.stringify(Qarray);
+    document.getElementById('display-question').innerHTML = (currentQuestion);
+    
 };
 
-function pushQuestion(event) {
+// display question
+function pushQuestion() {
     // I want to push question content to content-card, caused by button click
-    document.getElementById('#what-u-know').innerHTML = currentquestion;
+   
     
 
 }
 
+// answer question
 
+// timer
+/*startNow.addEventListener('click', timer)*/
+
+
+
+
+
+// where I am drawing my question options from
+const Qarray = [
+    {
+    question: 'placeholder question 1',
+    choices: [
+        {text:'A. Test', correct:false},
+        {text:'B. Correct', correct:true},
+        {text:'C. Test', correct:false},
+        {text:'D. Test', correct:false}
+    ]
+    },
+    {   
+    question: 'placeholder question 2',
+    choices: [
+        {text:'A. Correct', correct:true},
+        {text:'B. Test', correct:false},
+        {text:'C. Test', correct:false},
+        {text:'D. Test', correct:false}
+    ],
+    },
+    {    
+    question: 'placeholder question 3',
+    choices: [
+        {text:'A. Test', correct:false},
+        {text:'B. Test', correct:false},
+        {text:'C. Test', correct:false},
+        {text:'D. Correct', correct:true}
+    ],
+    },
+    {
+    question: 'placeholder question 4',
+    choices: [
+        {text:'A. Test', correct:false},
+        {text:'B. Test', correct:false},
+        {text:'C. Test', correct:false},
+        {text:'D. Correct', correct:true}
+    ],
+    },
+    {
+    question: 'placeholder question true or false',
+    choices: [
+        {text:'True', correct:true},
+        {text:'False', correct:false}
+    ],
+    }
+]
 // for testing
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
-console.log(whatQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
 console.log(Qarray)
 
 // timer goes here
@@ -168,3 +187,31 @@ function whatQuestion() {
     currentQuestion = Qarray.pop();
     return currentQuestion;
 };*/
+// tried to go back to original timer and repurpose it, but it kept going into negative numbers
+/* function timer() {
+    
+    const startTime = 1;
+    let minToSec = startTime * 10;
+
+    const countdownTimer = document.getElementById('timeytime');
+
+    setInterval(timeLeft, 1000);
+    var tickDown = setInterval(timeLeft, 1000);
+
+    function stopTimer() {
+        clearInterval(tickDown);
+        }
+    function timeLeft() {
+        const min = Math.floor(minToSec / 60);
+        let sec = minToSec % 60;
+
+        sec = sec < 10 ? '0' + sec : sec;
+
+        countdownTimer.innerHTML = `${min}: ${sec}`;
+        minToSec--;
+        if (minToSec === 0) {
+            stopTimer();
+        }
+    }
+}
+*/
