@@ -9,22 +9,16 @@
     <title>coding quiz</title>
 </head>
 <body>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <header class="timertitle">
+    <div class="timertitle">
         <h1>
             Coding Quiz
         </h1>
-        <h2 class="timer">Time Left: 
-            <div id="timeytime">
+    
+        <h1 class="timer">Time Left: 
+            <span id="timeytime">
                 
-            </div>
-        </h2>
-    </header>
-    <!--Display which question number the user is on-->
-    <div>
-        <h2 class="number-change">
-            Question number
-        </h2>
+            </span>
+        </h1>
     </div>
     <!--Displays actual question-->
     <div>
@@ -33,23 +27,28 @@
     <!--where the answers go-->
     <div class="content-card">
         <h2 class="question">
-            <span id="what-u-know">
+            <span id="display-question">
                 placeholder?
             </span>            
         </h2>
-        <ul class="change-the-answers">
-            <li id="optionA">A.</li>
-            <li id="optionB">B.</li>
-            <li id="optionC">C.</li>
-            <li id="optionD">D.</li>
-        </ul>
+        <div class="buttons">
+            <button id="optionA">
+                <span>test</span>
+            </button>
+            <button id="optionB">
+                <span>test</span>
+            </button>
+            <button id="optionC">
+                <span>test</span>
+            </button>
+            <button id="optionD">
+                <span>test</span>
+            </button>
+        </div>
     </div>
     <div class="answer-here">
-        <h3>Submit answer here:</h3>
-        <form>
-            <input type="text" id="fanswer" name="fanswer">
-        </form>
-        <button id="magic-button">Submit</button>
+        <button id="start-button">Start</button>
+        <button id="next-button">Next</button>
     </div>
     <script src="assets/script.js"></script>
 </body>
