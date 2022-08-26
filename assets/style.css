@@ -36,7 +36,10 @@ button {
     flex-direction: row;
     justify-content: flex-end;
 }
-
+.timer {
+    margin: 0;
+    padding: 0;
+}
 .number-change {
     display: flex;
     justify-content: center;

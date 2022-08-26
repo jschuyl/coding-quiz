@@ -1,50 +1,8 @@
-const questionInput = document.getElementById('what-u-know');
-const buttonA = document.getElementById('optionA');
-const buttonB = document.getElementById('optionB');
-const buttonC = document.getElementById('optionC');
-const buttonD = document.getElementById('optionD');
 const startNow = document.getElementById('start-button');
 const nextQuest = document.getElementById('next-button');
+const lastQuest = document.getElementById('last-quest');
+const answers = document.getElementById('answers');
 
-
-// start quiz
-startNow.addEventListener('click', startQuiz)
-function startQuiz() {
-    startNow.classList.add('hide');
-    nextQuest.classList.remove('hide');
-    if (Qarray.length === 0) {
-        nextQuest.classList.add('hide'); 
-        buttonA.classList.add('hide');
-        buttonB.classList.add('hide');
-        buttonC.classList.add('hide');
-        buttonD.classList.add('hide');
-    }
-}
-// clear question
-function clearCard() {
-
-}
-
-// display question
-nextQuest.addEventListener('click', pushQuestion);
-function pushQuestion() {
-    // I want to push question content to content-card, caused by button click
-
-   
-    
-
-}
-
-// answer question
-
-// timer
-/*startNow.addEventListener('click', timer)*/
-
-
-
-
-
-// where I am drawing my question options from
 const Qarray = [
     {
     question: 'placeholder question 1',
@@ -91,24 +49,30 @@ const Qarray = [
     }
 ]
 
+function whichQuestion() {
+    for (let i = 0; i < Qarray.length; i++)
+    if (Qarray.length === 0) {
+        document.getElementById('display-question').innerText = 'Quiz Complete!'
+    }
+    
+    var currentQuestion = Qarray.splice(Math.floor(Math.random() * Qarray.length), 1);
+    document.getElementById('display-question').innerHTML = (currentQuestion);
+    
+    return currentQuestion;
+};
 
 // timer goes here
-let interval = null;
-let howLong = document.getElementById('time');
+// 
 let [mill, sec, min] = [0, 0, 0];
+let howLong = document.querySelector('.timer');
+let interval = null;
 
 startNow.addEventListener('click', timer)
 function timer() {
     startNow.addEventListener('click', clearTime);
+    interval = setInterval (stopwatch, 10);
 
-    function clearTime() {
-        if(interval !== null) {
-        clearInterval(interval)
-        }
-    };
-
-    let interval = setInterval (stopwatch, 10);
-
+    // actual timer part
     function stopwatch() {
         mill += 10;
         if (mill == 1000) {
@@ -122,21 +86,25 @@ function timer() {
                 } 
             }
         }
-        // displays the time
+    }
+        // displays the time in html
         let m = min < 10 ? "0" + min : min;
         let s = sec < 10 ? '0' + sec : sec;
         let mi = mill < 10 ? '00' + mill :  mill < 100 ? '0' + mill : mill; 
 
-        document.querySelector('time').innerHTML = `${m}: ${s}: ${mi}`;
-    };
-    
+        howLong.innerHTML = `  ${m}  :   ${s}  :   ${mi}`;
+        function clearTime() {
+            if(interval !== null) {
+            clearInterval(interval);
+            }
+        };
 };
 // for testing
-console.log(pushQuestion());
-console.log(pushQuestion());
-console.log(pushQuestion());
-console.log(pushQuestion());
-console.log(pushQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
+console.log(whichQuestion());
 
 console.log(Qarray)
 // OLD CODE CEMETERY
@@ -253,4 +221,71 @@ function whichQuestion() {
     document.getElementById('display-question').innerHTML = (currentQuestion);
     
 };
+// code reverse engineered from https://github.com/WebDevSimplified/JavaScript-Quiz-App
+let mixItUp, QarrayIndex;
+// start quiz
+startNow.addEventListener('click', startQuiz);
+
+function startQuiz() {
+    startNow.classList.add('hide');
+    nextQuest.classList.remove('hide');
+    // randomize questions
+    mixItUp = Qarray.sort(() => Math.random() - .5);
+    QarrayIndex = 0;
+}
+// clear what is on the card
+function clearCard() {
+
+}
+// choose next question
+function readyQuest() {
+    QarrayIndex++;
+    pushQuestion(mixItUp[QarrayIndex]);
+}
+// display question
+
+function pushQuestion(currentQuestion) {
+    // I want to push question content to content-card, caused by button click
+    currentQuestion = document.getElementById('display-question');
+
+    currentQuestion.innerText = Qarray.question;
+
+   Qarray.choices.forEach(choice => {
+    const button = document.createElement('button')
+    button.innerText = choice.text
+    button.classList.add('buttons')
+        if (choice.correct) {
+            button.dataset.correct = choice.correct
+        }
+   })    
+   const button = document.createElement('button');
+   button.addEventListener('click', choiceAnswer);
+   answers.appendChild(button)
+}
+    
+
+
+
+// answers for question
+function soManyChoices() {
+    const button = document.createElement('button');
+    button.innerText = choices.text;
+    button.classList.add('buttons');
+    if (choices.correct) {
+        button.dataset.correct = choices.correct
+    }
+}
+console.log(soManyChoices)
+// user chooses answer
+function choiceAnswer(e) {
+    const thisButton = e.target;
+    if (mixItUp.lenth > QarrayIndex + 1) {
+        nextQuest.classList.remove('hide')
+    } else {
+        lastQuest.classList.remove('hide')
+    }
+}
+
+
+
 */
